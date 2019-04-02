@@ -11,7 +11,6 @@ import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as Img;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-vider.dart';
 import 'map_box.dart';
 import 'prograss_indicator.dart';
 import 'utils.dart';
