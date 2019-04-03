@@ -3,7 +3,6 @@ library data_review_and_upload;
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as Math;
-
 import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as Img;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'map_box.dart';
 import 'prograss_indicator.dart';
 import 'utils.dart';
@@ -34,8 +32,9 @@ class DataReviewAndUpload extends StatelessWidget {
 
 class DataReviewAndUploadBody extends StatefulWidget {
   final Map mapData;
+  final Widget container;
 
-  const DataReviewAndUploadBody({Key key, this.mapData}) : super(key: key);
+  const DataReviewAndUploadBody({Key key, this.mapData,this.container}) : super(key: key);
 
   @override
   _DataReviewAndUploadBodyState createState() =>
@@ -56,9 +55,7 @@ class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
     return Container(
       child: Stack(
         children: <Widget>[
-          TopPrograssBar(
-            progressBarImagePath: "assets/step_6.png",
-          ),
+          widget.container != null ? widget.container : Container(),
           Container(
             height: double.infinity,
             width: double.infinity,
