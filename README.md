@@ -1,5 +1,3 @@
-# data_review_and_upload
-
 # data_review_and_upload is a review map data and submit to server  package for Flutter
 
 [![pub package](https://img.shields.io/pub/v/data_review_and_upload.svg)](https://pub.dartlang.org/packages/data_review_and_upload)
@@ -24,5 +22,22 @@ On Android you'll need to add either  the `INTERNET` permission to your Android 
 
 ``` xml
 <uses-permission android:name="android.permission.INTERNET" />
+```
+
+### Code for the Full page location and image picker widget
+
+``` dart
+import 'package:data_review_and_upload/data_review_and_upload.dart';
+
+class DataReviewAndUpload extends StatelessWidget {
+  final Map mapData;
+  const PageSeven({Key key, this.mapData}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return DataReviewAndUpload(
+      mapData: mapData,
+    );
+  }
+}
 ```
 
