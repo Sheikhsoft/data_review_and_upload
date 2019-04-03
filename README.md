@@ -20,7 +20,7 @@ No configuration required - the plugin should work out of the box.
 
 ### Android
 
-On Android you'll need to add either  the `ACCESS_FINE_LOCATION` permission to your Android Manifest. Todo so open the AndroidManifest.xml file and one of the following two lines as direct children of the `<manifest>` tag:
+On Android you'll need to add either  the `INTERNET` permission to your Android Manifest. Todo so open the AndroidManifest.xml file and one of the following two lines as direct children of the `<manifest>` tag:
 
 ``` xml
 <uses-permission android:name="android.permission.INTERNET" />
