@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as Img;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-vider.dart';
+
 import 'map_box.dart';
 import 'prograss_indicator.dart';
 import 'utils.dart';
@@ -38,7 +38,8 @@ class DataReviewAndUploadBody extends StatefulWidget {
   const DataReviewAndUploadBody({Key key, this.mapData}) : super(key: key);
 
   @override
-  _DataReviewAndUploadBodyState createState() => _DataReviewAndUploadBodyState();
+  _DataReviewAndUploadBodyState createState() =>
+      _DataReviewAndUploadBodyState();
 }
 
 class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
@@ -149,7 +150,7 @@ class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
 
   Future upload(String imagePath, BuildContext context) async {
     var uri =
-    Uri.parse("http://www.sheikhsoft.com/accident-reporting/upload.php");
+        Uri.parse("http://www.sheikhsoft.com/accident-reporting/upload.php");
 
     var request = new http.MultipartRequest("POST", uri);
 
@@ -166,7 +167,7 @@ class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
       var compressImg = new File("$path/image_$rand.jpg")
         ..writeAsBytesSync(Img.encodeJpg(smallerImg, quality: 85));
       var stream =
-      new http.ByteStream(DelegatingStream.typed(compressImg.openRead()));
+          new http.ByteStream(DelegatingStream.typed(compressImg.openRead()));
       var length = await compressImg.length();
       var multipartFile = new http.MultipartFile("image", stream, length,
           filename: basename(compressImg.path));
@@ -178,7 +179,7 @@ class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
     request.fields['bodyPart'] = widget.mapData['bodyPart'];
     request.fields['date'] = widget.mapData['date'];
     request.fields['time'] = widget.mapData['time'];
-    request.fields['latitude'] = widget.mapData['longitude'];
+    request.fields['latitude'] = widget.mapData['latitude'];
     request.fields['longitude'] = widget.mapData['longitude'];
 
     var response = await request.send();
