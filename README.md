@@ -1,14 +1,28 @@
 # data_review_and_upload
 
-A new Flutter package Data Review and Upload.
+# data_review_and_upload is a review map data and submit to server  package for Flutter
 
-## Getting Started
+[![pub package](https://img.shields.io/pub/v/data_review_and_upload.svg)](https://pub.dartlang.org/packages/data_review_and_upload)
 
-This project is a starting point for a Dart
-[package](https://flutter.io/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+A Flutter package for iOS and Android for review map data and submit to server.
+## Demo
+<img src="http://sheikhsoft.com/screensort/data_review_and_upload.png" width="340" height="640" title="Screen Shoot">
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+
+## Installation
+
+First, add `data_review_and_upload` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+Second,
+
+### iOS
+
+No configuration required - the plugin should work out of the box.
+
+### Android
+
+On Android you'll need to add either  the `ACCESS_FINE_LOCATION` permission to your Android Manifest. Todo so open the AndroidManifest.xml file and one of the following two lines as direct children of the `<manifest>` tag:
+
+``` xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+

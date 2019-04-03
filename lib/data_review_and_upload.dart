@@ -34,7 +34,8 @@ class DataReviewAndUploadBody extends StatefulWidget {
   final Map mapData;
   final Widget container;
 
-  const DataReviewAndUploadBody({Key key, this.mapData,this.container}) : super(key: key);
+  const DataReviewAndUploadBody({Key key, this.mapData, this.container})
+      : super(key: key);
 
   @override
   _DataReviewAndUploadBodyState createState() =>
