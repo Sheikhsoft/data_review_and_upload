@@ -14,35 +14,20 @@ import 'map_box.dart';
 import 'prograss_indicator.dart';
 import 'utils.dart';
 
-class DataReviewAndUpload extends StatelessWidget {
-  final Map mapData;
-
-  DataReviewAndUpload({Key key, this.mapData}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    print(mapData);
-    return Scaffold(
-      body: DataReviewAndUploadBody(
-        mapData: mapData,
-      ),
-    );
-  }
-}
-
-class DataReviewAndUploadBody extends StatefulWidget {
+class DataReviewAndUpload extends StatefulWidget {
   final Map mapData;
   final Widget container;
+  final String apiUrl;
 
-  const DataReviewAndUploadBody({Key key, this.mapData, this.container})
+  const DataReviewAndUpload(
+      {Key key, this.mapData, this.container, this.apiUrl})
       : super(key: key);
 
   @override
-  _DataReviewAndUploadBodyState createState() =>
-      _DataReviewAndUploadBodyState();
+  _DataReviewAndUploadState createState() => _DataReviewAndUploadState();
 }
 
-class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
+class _DataReviewAndUploadState extends State<DataReviewAndUpload> {
   ProgressDialog pr;
   @override
   void initState() {
@@ -53,47 +38,50 @@ class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
   Widget build(BuildContext context) {
     pr = new ProgressDialog(context, ProgressDialogType.Normal);
     pr.setMessage('Please wait...');
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          widget.container != null ? widget.container : Container(),
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(top: 80.0, left: 25.0, right: 25.0),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Incident Summary",
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                ),
-                _bulidRow("What Happend", widget.mapData['incidentType']),
-                _bulidRow("Priority", widget.mapData['priority']),
-                _bulidRow("Date", widget.mapData['date']),
-                _bulidRow("Time", widget.mapData['time']),
-                _bulidColum("Injured Body Part", widget.mapData['bodyPart']),
-                _loadMap()
-              ],
+    return Scaffold(
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            widget.container != null ? widget.container : Container(),
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(top: 80.0, left: 25.0, right: 25.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "Incident Summary",
+                    style:
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
+                  _bulidRow("What Happend", widget.mapData['incidentType']),
+                  _bulidRow("Priority", widget.mapData['priority']),
+                  _bulidRow("Date", widget.mapData['date']),
+                  _bulidRow("Time", widget.mapData['time']),
+                  _bulidColum("Injured Body Part", widget.mapData['bodyPart']),
+                  _loadMap()
+                ],
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            alignment: Alignment.bottomRight,
-            child: FloatingActionButton(
-              backgroundColor: Colors.black87,
-              child: Icon(Icons.send),
-              onPressed: () async {
-                pr.show();
-                await upload(widget.mapData['image'], context);
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/home', (Route<dynamic> route) => false);
-              },
+            Container(
+              padding: EdgeInsets.all(10.0),
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                backgroundColor: Colors.black87,
+                child: Icon(Icons.send),
+                onPressed: () async {
+                  pr.show();
+                  await upload(widget.mapData['image'], context);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/home', (Route<dynamic> route) => false);
+                },
+              ),
             ),
-          ),
-          MyBackButton(),
-        ],
+            MyBackButton(),
+          ],
+        ),
       ),
     );
   }
@@ -147,8 +135,7 @@ class _DataReviewAndUploadBodyState extends State<DataReviewAndUploadBody> {
   }
 
   Future upload(String imagePath, BuildContext context) async {
-    var uri =
-        Uri.parse("http://www.sheikhsoft.com/accident-reporting/upload.php");
+    var uri = Uri.parse(widget.apiUrl);
 
     var request = new http.MultipartRequest("POST", uri);
 
